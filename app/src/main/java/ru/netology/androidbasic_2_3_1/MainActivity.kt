@@ -13,26 +13,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostsAdapter {
-            viewModel.likeById(it.id)
-        }
+        val adapter = PostsAdapter(
+            onShareListener = {viewModel.shareById(it.id)},
+            onLikeListener = {viewModel.likeById(it.id)}
+        )
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
 
-    }
-
-    private fun convertIntToStr(value: Int): String{
-        return when(value){
-            in 0..999 -> value.toString()
-            in 1000..1099 -> (value / 1000).toString() + "K"
-            in 1100..9999 -> ((value / 100).toDouble() / 10).toString() + "K"
-            in 10000..999000 -> (value / 1000).toString() + "K"
-            in 1000000..1099999 -> (value / 1000000).toString() + "M"
-            in 1100000..9999999 -> ((value / 100000).toDouble() / 10).toString() + "M"
-            in 10000000..999999999 -> (value / 1000000).toString() + "M"
-            else -> value.toString()
-        }
     }
 }

@@ -17,25 +17,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.likeById(it.id)
         }
         binding.list.adapter = adapter
-        viewModel.data.observe(this, { posts ->
-            adapter.list = posts
-        })
+        viewModel.data.observe(this) { posts ->
+            adapter.submitList(posts)
+        }
 
-//        viewModel.data.observe(this) { post ->
-//            with(binding) {
-//                textViewAuthor.text = post.author
-//                textViewMessage.text = post.content
-//                textViewPublished.text = post.published
-//                textViewLikes.text = convertIntToStr(post.likes)
-//                textViewShares.text = convertIntToStr(post.shares)
-//                textViewViews.text = convertIntToStr(post.views)
-//                imageButtonLikes.setImageResource(
-//                    if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_outline_24
-//                )
-//            }
-//        }
-//        binding.imageButtonLikes.setOnClickListener { viewModel.like() }
-//        binding.imageButtonShares.setOnClickListener { viewModel.share() }
     }
 
     private fun convertIntToStr(value: Int): String{

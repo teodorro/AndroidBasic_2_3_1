@@ -29,7 +29,7 @@ class PostViewHolder(
                     inflate(R.menu.options_post)
                     setOnMenuItemClickListener { item ->
                         when (item.itemId){
-                            R.id.remove -> {
+                            R.id.removeMenuItem -> {
                                 onRemoveListener(post)
                                 true
                             }

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class PostRepositoryInMemoryImpl : PostRepository {
+    private var nextId: Long = 3;
+
     private var posts = listOf<Post>(
         Post(
             id = 2,
@@ -59,5 +61,21 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun removeById(id: Long) {
         posts = posts.filter { it.id != id }
         data.value = posts
+    }
+
+    override fun save(post: Post) {
+        posts = listOf(
+            post.copy(
+                id = nextId++,
+                author = "me",
+                likedByMe = false,
+                published = "now",
+                likes = 0,
+                shares = 0,
+                views = 0
+            )
+        ) + posts
+        data.value = posts
+        return
     }
 }

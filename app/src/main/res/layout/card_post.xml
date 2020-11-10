@@ -25,7 +25,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
         app:layout_constraintTop_toTopOf="@+id/imageViewAvatar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonMoreVert"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonMenu"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="@sample/posts.json/data/author"
         android:singleLine="true"
@@ -42,11 +42,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageViewAvatar"
         app:layout_constraintTop_toBottomOf="@id/textViewAuthor"
-        app:layout_constraintEnd_toStartOf="@id/imageButtonMoreVert"
+        app:layout_constraintEnd_toStartOf="@id/imageButtonMenu"
         tools:text="@sample/posts.json/data/published" />
 
     <ImageButton
-        android:id="@+id/imageButtonMoreVert"
+        android:id="@+id/imageButtonMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
@@ -147,4 +147,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewViews"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewViews" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

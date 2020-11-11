@@ -64,18 +64,24 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun save(post: Post) {
-        posts = listOf(
-            post.copy(
-                id = nextId++,
-                author = "me",
-                likedByMe = false,
-                published = "now",
-                likes = 0,
-                shares = 0,
-                views = 0
-            )
-        ) + posts
+        if (post.id == 0L) {
+            posts = listOf(
+                post.copy(
+                    id = nextId++,
+                    author = "me",
+                    likedByMe = false,
+                    published = "now",
+                    likes = 0,
+                    shares = 0,
+                    views = 0
+                )
+            ) + posts
+            data.value = posts
+            return
+        }
+        posts = posts.map {
+            if (it.id != post.id) it else post.copy(content = post.content)
+        }
         data.value = posts
-        return
     }
 }

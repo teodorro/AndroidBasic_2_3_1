@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.imageButtonSave.setOnClickListener {
-            binding.groupRevert.visibility = View.GONE
             with(binding.editTextContent){
                 if (TextUtils.isEmpty(text)){
                     Toast.makeText(
@@ -60,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                         context.getString(R.string.error_empty_content),
                         Toast.LENGTH_SHORT
                     ).show()
+                    binding.groupRevert.visibility = View.GONE
                     return@setOnClickListener
                 }
 
@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
                 clearFocus()
                 AndroidUtils.hideKeyboard(this)
             }
+            binding.groupRevert.visibility = View.GONE
         }
 
         binding.imageButtonCloseEditing.setOnClickListener {

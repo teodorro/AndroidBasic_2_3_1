@@ -4,9 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class PostRepositoryInMemoryImpl : PostRepository {
-    private var nextId: Long = 3;
+    private var nextId: Long = 4;
 
     private var posts = listOf<Post>(
+        Post(
+            id = 3,
+            author = "Нетология. Университет интернет профессий",
+            content = ">.< Знаний хватит на всех. На следующей неделе разберемся.",
+            published = "19 сентября в 10:12",
+            likedByMe = false,
+            likes = 9999,
+            shares = 999,
+            views = 9999999
+        ),
         Post(
             id = 2,
             author = "Нетология. Университет интернет профессий",

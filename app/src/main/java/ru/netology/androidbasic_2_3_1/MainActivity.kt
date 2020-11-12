@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.transition.Visibility
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -44,9 +45,14 @@ class MainActivity : AppCompatActivity() {
                 requestFocus()
                 setText(post.content)
             }
+            binding.groupRevert.visibility = View.VISIBLE
+            with (binding.textViewEditContent){
+                text = post.content
+            }
         }
 
         binding.imageButtonSave.setOnClickListener {
+            binding.groupRevert.visibility = View.GONE
             with(binding.editTextContent){
                 if (TextUtils.isEmpty(text)){
                     Toast.makeText(
@@ -59,6 +65,24 @@ class MainActivity : AppCompatActivity() {
 
                 viewModel.changeContent(text.toString())
                 viewModel.save()
+
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyboard(this)
+            }
+        }
+
+        binding.imageButtonCloseEditing.setOnClickListener {
+            binding.groupRevert.visibility = View.GONE
+            with(binding.editTextContent){
+                if (TextUtils.isEmpty(text)){
+                    Toast.makeText(
+                        this@MainActivity,
+                        context.getString(R.string.error_empty_content),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
 
                 setText("")
                 clearFocus()
